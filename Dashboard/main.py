@@ -1,3 +1,14 @@
+# TODO data loading
+# TODO number story 1
+# TODO number story 2
+# TODO number story 3
+# TODO number story 4
+# TODO number story 5
+# TODO number story 6
+# TODO number story 7
+# TODO layout
+
+
 import dash
 import pandas as pd
 from dash import Dash, dcc, html, Input, Output
