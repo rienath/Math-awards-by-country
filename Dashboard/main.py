@@ -1,4 +1,3 @@
-#import pandas as pd
 import dash
 import pandas as pd
 from dash import Dash, dcc, html, Input, Output
@@ -6,18 +5,31 @@ import plotly.express as px
 
 app = dash.Dash(__name__)
 
+
+# ==================
+# COLOURS AND STYLES
+# ==================
+
 colors = {
     'background': '#FFFFFF',
     'text': '#000000'
 }
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
+
+# ====
+# DATA
+# ====
+
 df = pd.DataFrame({
     "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
     "Amount": [4, 1, 2, 2, 4, 5],
     "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
 })
+
+
+# =====
+# PLOTS
+# =====
 
 fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
 
@@ -26,6 +38,11 @@ fig.update_layout(
     paper_bgcolor=colors['background'],
     font_color=colors['text']
 )
+
+
+# ======
+# LAYOUT
+# ======
 
 app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
     html.H1(
