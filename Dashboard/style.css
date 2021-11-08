@@ -1,0 +1,29 @@
+body {
+  background-color: lightgoldenrodyellow;
+}
+
+/* NUMBER STORY 1 SETTINGS */
+
+/* Box 1 */
+div[data-testid="stHorizontalBlock"] > div:first-of-type {
+    background-color: red;
+    text-align: center;
+}
+
+/* Box 2 */
+div[data-testid="stHorizontalBlock"] > div:nth-of-type(2) {
+    background-color: blue;
+    text-align: center;
+}
+
+/* Box 3 */
+div[data-testid="stHorizontalBlock"] > div:nth-of-type(3) {
+    background-color: yellow;
+    text-align: center;
+}
+
+/* Box 4 */
+div[data-testid="stHorizontalBlock"] > div:nth-of-type(4) {
+    background-color: purple;
+    text-align: center;
+}

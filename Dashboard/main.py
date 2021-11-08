@@ -8,12 +8,13 @@
 # TODO layout
 
 
-import dash
+#import dash
 import pandas as pd
-from dash import Dash, dcc, html, Input, Output
+#from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
+import streamlit as st
 
-app = dash.Dash(__name__)
+#app = dash.Dash(__name__)
 
 # ================
 # ===== JUNK =====
@@ -35,9 +36,9 @@ colors = {
 }
 
 
-# ====
-# LOAD DATA
-# ====
+# =====================
+# ===== LOAD DATA =====
+# =====================
 
 # Define data file locations
 data_folder = '../data/'
@@ -52,43 +53,32 @@ df_cumulative_winners =  pd.read_csv(location_cumulative_winners)
 df_winners_per_capita  = pd.read_csv(location_winners_per_capita)
 df_overview = pd.read_csv(location_overview)
 
-# =====
-# PLOTS
-# =====
+# =================
+# ===== PLOTS =====
+# =================
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
+local_css("style.css")
 
-fig.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
+col1, col2, col3, col4 = st.columns(4)
 
+with col1:
+    st.header("A cat")
+    st.write('AFDSF')
+    st.write('dsfgdf')
+    st.image("https://static.streamlit.io/examples/cat.jpg")
+    st.write('')
 
-# ======
-# LAYOUT
-# ======
+with col2:
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg")
 
-app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
-    html.H1(
-        children='Hello Dash',
-        style={
-            'textAlign': 'center',
-            'color': colors['text']
-        }
-    ),
+with col3:
+    st.header("An owl")
+    st.image("https://static.streamlit.io/examples/owl.jpg")
 
-    html.Div(children='Dash: A web application framework for your data.', style={
-        'textAlign': 'center',
-        'color': colors['text']
-    }),
-
-    dcc.Graph(
-        id='example-graph-2',
-        figure=fig
-    )
-])
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
+with col4:
+    st.header("An owl")
+    st.image("https://static.streamlit.io/examples/owl.jpg")
