@@ -1,4 +1,3 @@
-# TODO data loading
 # TODO number story 1
 # TODO number story 2
 # TODO number story 3
@@ -16,6 +15,15 @@ import plotly.express as px
 
 app = dash.Dash(__name__)
 
+# ================
+# ===== JUNK =====
+# ================
+df = pd.DataFrame({
+    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
+    "Amount": [4, 1, 2, 2, 4, 5],
+    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
+})
+
 
 # ==================
 # COLOURS AND STYLES
@@ -28,15 +36,21 @@ colors = {
 
 
 # ====
-# DATA
+# LOAD DATA
 # ====
 
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
+# Define data file locations
+data_folder = '../data/'
 
+location_top_universities = data_folder + 'top-universities.csv'
+location_cumulative_winners = data_folder + 'cumulative-winners.csv'
+location_winners_per_capita = data_folder + 'winners-per-capita.csv'
+location_overview = data_folder + 'overview.csv'
+
+df_top_universities = pd.read_csv(location_top_universities)
+df_cumulative_winners =  pd.read_csv(location_cumulative_winners)
+df_winners_per_capita  = pd.read_csv(location_winners_per_capita)
+df_overview = pd.read_csv(location_overview)
 
 # =====
 # PLOTS
