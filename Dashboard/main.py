@@ -1,9 +1,10 @@
 # TODO colours
 # TODO lighttheme/2021/AbelField disclaimer
 # TODO better plot titles
-# TODO numbers in NS1
+# TODO numbers in NS1 (lims)
 # TODO NS 2-5 start from 0
-# TODO layout
+# TODO NS 5 from 1935 to 2021 ns 2-3
+# TODO NS 7 Laureates by university of affiliation
 
 import pandas as pd
 import plotly.express as px
