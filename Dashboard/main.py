@@ -56,7 +56,7 @@ import os
 
 data_folder = os.path.abspath("/data/")
 
-location_top_universities = os.path.abspath("/data/top-universities.csv")
+location_top_universities = os.path.abspath("data/top-universities.csv")
 location_cumulative_winners = data_folder + 'cumulative-winners.csv'
 location_winners_per_capita = data_folder + 'winners-per-capita.csv'
 location_winners_per_100_mil = data_folder + 'winners-per-100-mil.csv'
