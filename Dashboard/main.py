@@ -1,11 +1,12 @@
+# Do you like titles?
+# NS 5 does not start from 0 because of smoothing. Could make it unsmooth, but it would be ugly.
+# Pie chart sizes ok? Not missleading?
+# Flourish map looks weird when everything is 0
+
 # TODO colours
 # TODO lighttheme/2021/AbelField disclaimer
 # TODO better plot titles
-# TODO NS 2-5 start from 0
-# TODO NS 5 from 1935 to 2021 ns 2-3
 # TODO NS 7 Laureates by university of affiliation
-
-# TODO numbers in NS1 (lims)
 
 import pandas as pd
 import plotly.express as px
