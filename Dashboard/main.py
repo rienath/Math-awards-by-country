@@ -1,8 +1,3 @@
-# TODO number story 2
-# TODO number story 3
-# TODO number story 4
-# TODO number story 5
-# TODO number story 6
 # TODO number story 7
 # TODO layout
 # TODO colours
@@ -229,8 +224,71 @@ with column_2:
 # ===== Number Story 6 =====
 # ==========================
 # > Choropleth map with total winners
+df_2021 = df_cumulative_winners.iloc[-1]
+countries = df_2021.drop('Year').to_frame(name='Laureates')
+world_path = data_folder + 'custom.geo.json'
+with open(world_path) as f:
+    geo_world = json.load(f)
 
 
+# Instanciating necessary lists
+found = []
+missing = []
+countries_geo = []
+
+# For simpler acces, setting "zone" as index in a temporary dataFrame
+tmp = countries
+
+# Looping over the custom GeoJSON file
+for country in geo_world['features']:
+
+    # Country name detection
+    country_name = country['properties']['name']
+
+    # Eventual replacement with our transition dictionnary
+    go_on = country_name in tmp.index
+
+    # If country is in original dataset or transition dictionnary
+    if go_on:
+
+        # Adding country to our "Matched/found" countries
+        found.append(country_name)
+
+        # Getting information from both GeoJSON file and dataFrame
+        geometry = country['geometry']
+
+        # Adding 'id' information for further match between map and data
+        countries_geo.append({
+            'type': 'Feature',
+            'geometry': geometry,
+            'id': country_name
+        })
+
+    # Else, adding the country to the missing countries
+    else:
+        missing.append(country_name)
+
+geo_world_ok = {'type': 'FeatureCollection', 'features': countries_geo}
+
+# Create figure
+
+fig = px.choropleth_mapbox(
+    countries,
+    geojson=geo_world_ok,
+    locations=countries.index,
+    color=countries['Laureates'],
+    color_continuous_scale='YlOrRd',
+    range_color=(0, countries['Laureates'].max()),
+    hover_name=countries.index,
+    hover_data={'Laureates': True},
+    mapbox_style='open-street-map',
+    zoom=1,
+    center={'lat': 19, 'lon': 11},
+    opacity=0.6,
+    height=800
+)
+
+st.plotly_chart(fig, use_container_width=True)
 
 # ==========================
 # ===== Number Story 7 =====
