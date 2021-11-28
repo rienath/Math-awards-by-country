@@ -7,6 +7,7 @@
 # TODO layout
 # TODO colours
 # TODO theme/2021/AbelField disclaimer
+# TODO better plot titles
 
 
 #import dash
@@ -15,6 +16,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 import math
+import json
 
 #app = dash.Dash(__name__)
 
@@ -70,12 +72,14 @@ data_folder = '../data/'
 location_top_universities = data_folder + 'top-universities.csv'
 location_cumulative_winners = data_folder + 'cumulative-winners.csv'
 location_winners_per_capita = data_folder + 'winners-per-capita.csv'
+location_winners_per_100_mil = data_folder + 'winners-per-100-mil.csv'
 location_overview = data_folder + 'overview.csv'
 
 # Load the data
 df_top_universities = pd.read_csv(location_top_universities)
 df_cumulative_winners =  pd.read_csv(location_cumulative_winners)
 df_winners_per_capita  = pd.read_csv(location_winners_per_capita)
+df_winners_per_100_mil  = pd.read_csv(location_winners_per_100_mil)
 df_overview = pd.read_csv(location_overview)
 
 
@@ -146,22 +150,22 @@ st.markdown('''
     <div class="col-sm-2" style='font-size: 15px;'>
         <div style="background-color: '''+box_background_colour+'''; border-radius: 40px; vertical-align: middle;">
           <p style='text-align: center; font-weight: 400; color: #000'>'''+box_2_sign+'''</p>
-          <p style='text-align: center; position: relative; vertical-align: center; font-size: 50px; font-weight: bold; color: #e73631'>'''+box_2_value+'''</p>
-          <p style='text-align: center; font-size: 0px; color: blue'>\00</p>
+          <p style='text-align: center; position: relative; vertical-align: center; font-size: 50px; font-weight: bold; color: #000'>'''+box_2_value+'''</p>
+          <p style='text-align: center; font-size: 0px; color: #000'>\00</p>
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
         <div style="background-color: '''+box_background_colour+'''; border-radius: 40px; vertical-align: middle;">
           <p style='text-align: center; font-weight: 400; color: #000'>'''+box_3_sign+'''</p>
-          <p style='text-align: center; font-size: 35px; font-weight: bold; color: #70a82c'>'''+box_3_value+'''</p>
-          <p style='text-align: center; font-size: 15px; color: #70a82c'>'''+box_3_value_2+'''</p>
+          <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>'''+box_3_value+'''</p>
+          <p style='text-align: center; font-size: 15px; color: #000'>'''+box_3_value_2+'''</p>
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
         <div style="background-color: '''+box_background_colour+'''; border-radius: 40px">
           <p style='text-align: center; font-weight: 400; color: #000'>'''+box_4_sign+'''</p>
-          <p style='text-align: center; font-size: 35px; font-weight: bold; color: blue'>'''+box_4_value+'''</p>
-          <p style='text-align: center; font-size: 15px; color: blue'>'''+box_4_value_2+'''</p>
+          <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>'''+box_4_value+'''</p>
+          <p style='text-align: center; font-size: 15px; color: #000'>'''+box_4_value_2+'''</p>
         </div>
     </div>
   </div>
@@ -190,22 +194,34 @@ st.markdown(
             <div style='width:100%!; margin-top:4px!important; text-align:right!important;'></div>
         </div>
      </div>
+     <h1 style="margin: auto; width: 100%;"></h1>
     ''',
     unsafe_allow_html=True
 )
 
 
-# ==========================
-# ===== Number Story 4 =====
-# ==========================
+# ==============================
+# ===== Number Story 4 & 5 =====
+# ==============================
 # > Line chart cumulative awards
-
-
-
-# ==========================
-# ===== Number Story 5 =====
-# ==========================
 # > Line chart cumulative awards per capita
+
+column_1, column_2 = st.columns(2)
+chart_height = 550
+plot_1_title = '<b>Laureates per country</b>'
+plot_2_title = '<b>Laureates per country per 100 million inhabitants</b>'
+
+with column_1:
+    fig = px.line(df_cumulative_winners, x="Year", y=df_cumulative_winners.columns, line_shape='spline',
+                  height=chart_height, title=plot_1_title)
+    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates")
+    st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
+
+with column_2:
+    fig = px.line(df_winners_per_100_mil, x="Year", y=df_winners_per_100_mil.columns, line_shape='spline',
+                  height=chart_height, title=plot_2_title)
+    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates per 100 million inhabitants")
+    st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
 
 
