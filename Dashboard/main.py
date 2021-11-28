@@ -1,10 +1,11 @@
 # TODO colours
 # TODO lighttheme/2021/AbelField disclaimer
 # TODO better plot titles
-# TODO numbers in NS1 (lims)
 # TODO NS 2-5 start from 0
 # TODO NS 5 from 1935 to 2021 ns 2-3
 # TODO NS 7 Laureates by university of affiliation
+
+# TODO numbers in NS1 (lims)
 
 import pandas as pd
 import plotly.express as px
@@ -59,9 +60,9 @@ location_overview = data_folder + 'overview.csv'
 
 # Load the data
 df_top_universities = pd.read_csv(location_top_universities)
-df_cumulative_winners =  pd.read_csv(location_cumulative_winners)
-df_winners_per_capita  = pd.read_csv(location_winners_per_capita)
-df_winners_per_100_mil  = pd.read_csv(location_winners_per_100_mil)
+df_cumulative_winners = pd.read_csv(location_cumulative_winners)
+df_winners_per_capita = pd.read_csv(location_winners_per_capita)
+df_winners_per_100_mil = pd.read_csv(location_winners_per_100_mil)
 df_overview = pd.read_csv(location_overview)
 
 
@@ -93,18 +94,16 @@ st.markdown('''
 fields_total = df_overview['Fields Medals'][0]
 abel_total = df_overview['Abel Prizes'][0]
 top_country = df_overview['Winner Country'][0]
-top_country_result = df_overview['Winner result'][0]
+top_country_result = df_overview['Winner Result'][0]
 top_country_capita = df_overview['Winner per Capita Country'][0]
-top_country_capita_result = df_overview['Winner per Capita result'][0]
+top_country_100_mil_result = df_overview['Winner per 100 Million Inhabitants Result'][0]
 
 # Round top country result as number of laureates is a whole number
 top_country_result = round(top_country_result)
-# Make per capita results per million inhabitants instead of 1
-top_country_capita_result = top_country_capita_result * 1000000
 # Round per capita results to 3 significant figures
 sig_fig = 3
-top_country_capita_result = round(top_country_capita_result, sig_fig -
-                                  int(math.floor(math.log10(abs(top_country_capita_result)))) - 1)
+top_country_100_mil_result = round(top_country_100_mil_result, sig_fig -
+                                  int(math.floor(math.log10(abs(top_country_100_mil_result)))) - 1)
 
 # Assign the fields to Number Story 1 boxes and set other NS1 settings
 box_background_colour = '#fccccc'
@@ -117,7 +116,7 @@ box_2_value = str(abel_total)
 box_3_value = str(top_country)
 box_4_value = str(top_country_capita)
 box_3_value_2 = 'with ' + str(top_country_result) + ' laureates'
-box_4_value_2 = 'with ' + str(top_country_capita_result) + ' laureates per million inhabitants'
+box_4_value_2 = 'with ' + str(top_country_100_mil_result) + ' laureates per million inhabitants'
 
 st.markdown('''
 <div class="jumbotron text-center"  style='padding: 0;'>
