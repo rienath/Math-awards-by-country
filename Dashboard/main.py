@@ -83,7 +83,7 @@ with open(location_world_path) as f:
 # =================
 
 st.markdown('''
-<div class="jumbotron text-center" style='background-color: #fff'>
+<div class="jumbotron text-center">
   <h1 style="margin: auto; width: 100%;">Mathematics Awards Interactive Dashboard</h1>
   <h1 style="margin: auto; width: 100%;"></h1>
 </div>
@@ -121,11 +121,11 @@ box_2_value = str(abel_total)
 box_3_value = str(top_country)
 box_4_value = str(top_country_capita)
 box_3_value_2 = 'with ' + str(top_country_result) + ' laureates'
-box_4_value_2 = 'with ' + str(top_country_100_mil_result) + ' laureates per million inhabitants'
+box_4_value_2 = 'with ' + str(top_country_100_mil_result) + ' laureates per 100 million inhabitants'
 
 st.markdown('''
 <div class="jumbotron text-center"  style='padding: 0;'>
-  <div class="row justify-content-md-center" style='background-color: #fff; width: 100%; margin: auto;'>
+  <div class="row justify-content-md-center" style='width: 100%; margin: auto;'>
     <div class="col-sm-2" style="font-size: 15px; vertical-align: bottom;">
         <div style="background-color: #64e987; border-radius: 40px; vertical-align: bottom;">
           <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''+box_1_sign+'''</p>
@@ -168,7 +168,7 @@ st.markdown('''
 st.markdown(
     '''
     <h1 style="margin: auto; width: 100%;"></h1>
-    <div class="row" style='background-color: #fff; width: 100%; margin: auto;'>
+    <div class="row" style='width: 100%; margin: auto;'>
         <div class="col-sm-6" style="font-size: 15px; border-radius: 30px">
             <iframe src='https://flo.uri.sh/visualisation/7956000/embed' frameborder='0' scrolling='no' 
                 style='width:100%; height:600px;'> </iframe>
@@ -241,6 +241,7 @@ st.plotly_chart(fig, use_container_width=True)
 # ===== Number Story 6 =====
 # ==========================
 # > Choropleth map with total winners
+
 df_2021 = df_cumulative_winners.iloc[-1]
 countries = df_2021.drop('Year').to_frame(name='Laureates')
 
