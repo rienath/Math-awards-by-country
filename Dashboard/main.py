@@ -9,6 +9,7 @@
 
 # TODO better plot titles
 
+import os
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -52,15 +53,12 @@ st.markdown(
 # =====================
 
 # Define data file locations
-import os
-
-data_folder = os.path.abspath("/data/")
-
 location_top_universities = os.path.abspath("data/top-universities.csv")
 location_cumulative_winners = os.path.abspath("data/cumulative-winners.csv")
 location_winners_per_capita = os.path.abspath("data/winners-per-capita.csv")
 location_winners_per_100_mil = os.path.abspath("data/winners-per-100-mil.csv")
 location_overview = os.path.abspath("data/overview.csv")
+location_world_path = os.path.abspath('data/custom.geo.json')
 
 # Load the data
 df_top_universities = pd.read_csv(location_top_universities)
@@ -68,6 +66,9 @@ df_cumulative_winners = pd.read_csv(location_cumulative_winners)
 df_winners_per_capita = pd.read_csv(location_winners_per_capita)
 df_winners_per_100_mil = pd.read_csv(location_winners_per_100_mil)
 df_overview = pd.read_csv(location_overview)
+
+with open(location_world_path) as f:
+    geo_world = json.load(f)
 
 
 # =================
@@ -242,12 +243,8 @@ st.plotly_chart(fig, use_container_width=True)
 # > Choropleth map with total winners
 df_2021 = df_cumulative_winners.iloc[-1]
 countries = df_2021.drop('Year').to_frame(name='Laureates')
-world_path = data_folder + 'custom.geo.json'
-with open(world_path) as f:
-    geo_world = json.load(f)
 
-
-# Instanciating necessary lists
+# Instantiating necessary lists
 found = []
 missing = []
 countries_geo = []
