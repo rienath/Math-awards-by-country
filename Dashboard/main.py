@@ -1,29 +1,15 @@
-# TODO number story 7
-# TODO layout
 # TODO colours
-# TODO theme/2021/AbelField disclaimer
+# TODO lighttheme/2021/AbelField disclaimer
 # TODO better plot titles
+# TODO numbers in NS1
+# TODO NS 2-5 start from 0
+# TODO layout
 
-
-#import dash
 import pandas as pd
-#from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
 import streamlit as st
 import math
 import json
-
-#app = dash.Dash(__name__)
-
-# ================
-# ===== JUNK =====
-# ================
-
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
 
 
 # ==================
@@ -219,6 +205,15 @@ with column_2:
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
 
+# ==========================
+# ===== Number Story 7 =====
+# ==========================
+# > Universities by awards pie chart
+
+fig = px.pie(df_top_universities, values='Winners', names='University', title='Universities', height=1000)
+fig.update_traces(textinfo='percent+label', textposition='inside')
+st.plotly_chart(fig, use_container_width=True)
+
 
 # ==========================
 # ===== Number Story 6 =====
@@ -289,11 +284,3 @@ fig = px.choropleth_mapbox(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
-# ==========================
-# ===== Number Story 7 =====
-# ==========================
-# > Universities by awards pie chart
-
-#df.loc[df['pop'] < 2.e6, 'country'] = 'Other countries' # Represent only large countries
-#fig = px.pie(df_top_universities, values='University', names='Winners', title='Population of European continent')
