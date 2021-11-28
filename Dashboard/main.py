@@ -52,7 +52,9 @@ st.markdown(
 # =====================
 
 # Define data file locations
-data_folder = '/data/'
+import os
+
+data_folder = os.path.abspath("/data/")
 
 location_top_universities = data_folder + 'top-universities.csv'
 location_cumulative_winners = data_folder + 'cumulative-winners.csv'
