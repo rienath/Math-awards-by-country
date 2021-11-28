@@ -57,10 +57,10 @@ import os
 data_folder = os.path.abspath("/data/")
 
 location_top_universities = os.path.abspath("data/top-universities.csv")
-location_cumulative_winners = data_folder + 'cumulative-winners.csv'
-location_winners_per_capita = data_folder + 'winners-per-capita.csv'
-location_winners_per_100_mil = data_folder + 'winners-per-100-mil.csv'
-location_overview = data_folder + 'overview.csv'
+location_cumulative_winners = os.path.abspath("data/cumulative-winners.csv")
+location_winners_per_capita = os.path.abspath("data/winners-per-capita.csv")
+location_winners_per_100_mil = os.path.abspath("data/winners-per-100-mil.csv")
+location_overview = os.path.abspath("data/overview.csv")
 
 # Load the data
 df_top_universities = pd.read_csv(location_top_universities)
