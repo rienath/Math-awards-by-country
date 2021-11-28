@@ -52,7 +52,7 @@ st.markdown(
 # =====================
 
 # Define data file locations
-data_folder = '../data/'
+data_folder = '/data/'
 
 location_top_universities = data_folder + 'top-universities.csv'
 location_cumulative_winners = data_folder + 'cumulative-winners.csv'
