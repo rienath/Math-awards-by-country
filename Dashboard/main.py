@@ -199,7 +199,7 @@ plot_2_title = '<b>Laureates per country per 100 million inhabitants</b>'
 
 with column_1:
     fig = px.line(df_cumulative_winners, x="Year", y=df_cumulative_winners.columns, line_shape='spline',
-                  height=chart_height, title=plot_1_title)
+                  height=chart_height, title=plot_1_title, color_discrete_sequence=px.colors.qualitative.Light24)
     fig.update_layout(xaxis_title="Year", yaxis_title="Laureates", font=dict(size=13),
                       title={
                           'y':0.9,
@@ -210,7 +210,7 @@ with column_1:
 
 with column_2:
     fig = px.line(df_winners_per_100_mil, x="Year", y=df_winners_per_100_mil.columns, line_shape='spline',
-                  height=chart_height, title=plot_2_title)
+                  height=chart_height, title=plot_2_title, color_discrete_sequence=px.colors.qualitative.Light24)
     fig.update_layout(xaxis_title="Year", yaxis_title="Laureates per 100 million inhabitants", font=dict(size=13),
                       title={
                           'y':0.9,
