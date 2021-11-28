@@ -5,8 +5,9 @@
 
 # TODO colours
 # TODO lighttheme/2021/AbelField disclaimer
-# TODO better plot titles
 # TODO NS 7 Laureates by university of affiliation
+
+# TODO better plot titles
 
 import pandas as pd
 import plotly.express as px
@@ -123,31 +124,31 @@ st.markdown('''
 <div class="jumbotron text-center"  style='padding: 0;'>
   <div class="row justify-content-md-center" style='background-color: #fff; width: 100%; margin: auto;'>
     <div class="col-sm-2" style="font-size: 15px; vertical-align: bottom;">
-        <div style="background-color: '''+box_background_colour+'''; border-radius: 40px; vertical-align: bottom;">
-          <p style='text-align: center; font-weight: 400; color: #000; vertical-align: bottom;'>'''+box_1_sign+'''</p>
-          <p style='text-align: center; font-size: 50px; font-weight: bold; color: #000'>'''+box_1_value+'''</p>
+        <div style="background-color: #64e987; border-radius: 40px; vertical-align: bottom;">
+          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''+box_1_sign+'''</p>
+          <p style='text-align: center; font-size: 47.5px; font-weight: bold; color: #000; position: relative; bottom: 3px'>'''+box_1_value+'''</p>
           <p style='text-align: center; font-size: 0px; color: blue'>\00</p>
         </div>
     </div>
     <div class="col-sm-2" style='font-size: 15px;'>
-        <div style="background-color: '''+box_background_colour+'''; border-radius: 40px; vertical-align: middle;">
-          <p style='text-align: center; font-weight: 400; color: #000'>'''+box_2_sign+'''</p>
-          <p style='text-align: center; position: relative; vertical-align: center; font-size: 50px; font-weight: bold; color: #000'>'''+box_2_value+'''</p>
+        <div style="background-color: #92f294; border-radius: 40px; vertical-align: middle;">
+          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''+box_2_sign+'''</p>
+          <p style='text-align: center; font-size: 47.5px; font-weight: bold; color: #000; position: relative; bottom: 3px'>'''+box_2_value+'''</p>
           <p style='text-align: center; font-size: 0px; color: #000'>\00</p>
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
-        <div style="background-color: '''+box_background_colour+'''; border-radius: 40px; vertical-align: middle;">
-          <p style='text-align: center; font-weight: 400; color: #000'>'''+box_3_sign+'''</p>
+        <div style="background-color: #c0f9fa; border-radius: 40px; vertical-align: middle;">
+          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''+box_3_sign+'''</p>
           <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>'''+box_3_value+'''</p>
-          <p style='text-align: center; font-size: 15px; color: #000'>'''+box_3_value_2+'''</p>
+          <p style='text-align: center; font-size: 13px; color: #000; position: relative; bottom: 10px'>'''+box_3_value_2+'''</p>
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
         <div style="background-color: '''+box_background_colour+'''; border-radius: 40px">
-          <p style='text-align: center; font-weight: 400; color: #000'>'''+box_4_sign+'''</p>
+          <p style='text-align: center; font-weight: 400; color: #000; position:relative; top:10px'>'''+box_4_sign+'''</p>
           <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>'''+box_4_value+'''</p>
-          <p style='text-align: center; font-size: 15px; color: #000'>'''+box_4_value_2+'''</p>
+          <p style='text-align: center; font-size: 13px; color: #000; position: relative; bottom: 10px'>'''+box_4_value_2+'''</p>
         </div>
     </div>
   </div>
@@ -189,21 +190,38 @@ st.markdown(
 # > Line chart cumulative awards per capita
 
 column_1, column_2 = st.columns(2)
-chart_height = 550
+chart_height = 600
 plot_1_title = '<b>Laureates per country</b>'
 plot_2_title = '<b>Laureates per country per 100 million inhabitants</b>'
 
 with column_1:
     fig = px.line(df_cumulative_winners, x="Year", y=df_cumulative_winners.columns, line_shape='spline',
                   height=chart_height, title=plot_1_title)
-    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates")
+    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates", font=dict(size=13),
+                      title={
+                          'y':0.9,
+                          'x':0.1,
+                          'xanchor': 'left',
+                          'yanchor': 'top'})
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
 with column_2:
     fig = px.line(df_winners_per_100_mil, x="Year", y=df_winners_per_100_mil.columns, line_shape='spline',
                   height=chart_height, title=plot_2_title)
-    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates per 100 million inhabitants")
+    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates per 100 million inhabitants", font=dict(size=13),
+                      title={
+                          'y':0.9,
+                          'x':0.1,
+                          'xanchor': 'left',
+                          'yanchor': 'top'})
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
+
+    st.markdown(
+        '''
+        <h1 style="margin: auto; width: 100%;"></h1>
+        ''',
+        unsafe_allow_html=True
+    )
 
 
 # ==========================
@@ -211,7 +229,7 @@ with column_2:
 # ==========================
 # > Universities by awards pie chart
 
-fig = px.pie(df_top_universities, values='Winners', names='University', title='Universities', height=1000)
+fig = px.pie(df_top_universities, values='Winners', names='University', title='<b>Laureates by university of affiliation</b>', height=1000)
 fig.update_traces(textinfo='percent+label', textposition='inside')
 st.plotly_chart(fig, use_container_width=True)
 
