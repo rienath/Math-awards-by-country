@@ -1,13 +1,10 @@
 # Do you like titles?
-# NS 5 does not start from 0 because of smoothing. Could make it unsmooth, but it would be ugly.
-# Pie chart sizes ok? Not missleading?
+# NS 5 does not start from 0 because of smoothing. Could make it not smooth, but it would be ugly.
+# Pie chart sizes ok? Not misleading?
 # Flourish map looks weird when everything is 0
 
-# TODO colours
-# TODO lighttheme/2021/AbelField disclaimer
-# TODO NS 7 Laureates by university of affiliation
+# TODO lighttheme/2021 disclaimer
 
-# TODO better plot titles
 
 import os
 import pandas as pd
@@ -15,7 +12,6 @@ import plotly.express as px
 import streamlit as st
 import math
 import json
-
 
 # ==================
 # COLOURS AND STYLES
@@ -70,7 +66,6 @@ df_overview = pd.read_csv(location_overview)
 with open(location_world_path) as f:
     geo_world = json.load(f)
 
-
 # =================
 # =================
 # ===== PLOTS =====
@@ -88,7 +83,6 @@ st.markdown('''
   <h1 style="margin: auto; width: 100%;"></h1>
 </div>
 ''', unsafe_allow_html=True)
-
 
 # ==========================
 # ===== Number Story 1 =====
@@ -108,7 +102,7 @@ top_country_result = round(top_country_result)
 # Round per capita results to 3 significant figures
 sig_fig = 3
 top_country_100_mil_result = round(top_country_100_mil_result, sig_fig -
-                                  int(math.floor(math.log10(abs(top_country_100_mil_result)))) - 1)
+                                   int(math.floor(math.log10(abs(top_country_100_mil_result)))) - 1)
 
 # Assign the fields to Number Story 1 boxes and set other NS1 settings
 box_background_colour = '#fccccc'
@@ -128,36 +122,43 @@ st.markdown('''
   <div class="row justify-content-md-center" style='width: 100%; margin: auto;'>
     <div class="col-sm-2" style="font-size: 15px; vertical-align: bottom;">
         <div style="background-color: #64e987; border-radius: 40px; vertical-align: bottom;">
-          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''+box_1_sign+'''</p>
-          <p style='text-align: center; font-size: 47.5px; font-weight: bold; color: #000; position: relative; bottom: 3px'>'''+box_1_value+'''</p>
+          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''
+            + box_1_sign + '''</p>
+          <p style='text-align: center; font-size: 47.5px; font-weight: bold; color: #000; 
+          position: relative; bottom: 3px'>''' + box_1_value + '''</p>
           <p style='text-align: center; font-size: 0px; color: blue'>\00</p>
         </div>
     </div>
     <div class="col-sm-2" style='font-size: 15px;'>
         <div style="background-color: #92f294; border-radius: 40px; vertical-align: middle;">
-          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''+box_2_sign+'''</p>
-          <p style='text-align: center; font-size: 47.5px; font-weight: bold; color: #000; position: relative; bottom: 3px'>'''+box_2_value+'''</p>
+          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>''' + box_2_sign
+            + '''</p>
+          <p style='text-align: center; font-size: 47.5px; font-weight: bold; color: #000; position: relative; 
+          bottom: 3px'>''' + box_2_value + '''</p>
           <p style='text-align: center; font-size: 0px; color: #000'>\00</p>
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
         <div style="background-color: #c0f9fa; border-radius: 40px; vertical-align: middle;">
-          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>'''+box_3_sign+'''</p>
-          <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>'''+box_3_value+'''</p>
-          <p style='text-align: center; font-size: 13px; color: #000; position: relative; bottom: 10px'>'''+box_3_value_2+'''</p>
+          <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>''' + box_3_sign
+            + '''</p>
+          <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>''' + box_3_value + '''</p>
+          <p style='text-align: center; font-size: 13px; color: #000; position: relative; bottom: 10px'>'''
+            + box_3_value_2 + '''</p>
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
-        <div style="background-color: '''+box_background_colour+'''; border-radius: 40px">
-          <p style='text-align: center; font-weight: 400; color: #000; position:relative; top:10px'>'''+box_4_sign+'''</p>
-          <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>'''+box_4_value+'''</p>
-          <p style='text-align: center; font-size: 13px; color: #000; position: relative; bottom: 10px'>'''+box_4_value_2+'''</p>
+        <div style="background-color: ''' + box_background_colour + '''; border-radius: 40px">
+          <p style='text-align: center; font-weight: 400; color: #000; position:relative; top:10px'>''' +
+            box_4_sign + '''</p>
+          <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>''' + box_4_value + '''</p>
+          <p style='text-align: center; font-size: 13px; color: #000; position: relative; bottom: 10px'>''' +
+            box_4_value_2 + '''</p>
         </div>
     </div>
   </div>
 </div>
 ''', unsafe_allow_html=True)
-
 
 # =============================
 # ===== Number Story 2 & 3=====
@@ -185,7 +186,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
 # ==============================
 # ===== Number Story 4 & 5 =====
 # ==============================
@@ -202,10 +202,11 @@ with column_1:
                   height=chart_height, title=plot_1_title, color_discrete_sequence=px.colors.qualitative.Light24)
     fig.update_layout(xaxis_title="Year", yaxis_title="Laureates", font=dict(size=13),
                       title={
-                          'y':0.9,
-                          'x':0.1,
+                          'y': 0.9,
+                          # 'x':0.1,
                           'xanchor': 'left',
                           'yanchor': 'top'})
+    fig.update_layout(title={'font': {'size': 23}})
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
 with column_2:
@@ -213,10 +214,11 @@ with column_2:
                   height=chart_height, title=plot_2_title, color_discrete_sequence=px.colors.qualitative.Light24)
     fig.update_layout(xaxis_title="Year", yaxis_title="Laureates per 100 million inhabitants", font=dict(size=13),
                       title={
-                          'y':0.9,
-                          'x':0.1,
+                          'y': 0.9,
+                          # 'x':0.1,
                           'xanchor': 'left',
                           'yanchor': 'top'})
+    fig.update_layout(title={'font': {'size': 23}})
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
     st.markdown(
@@ -226,16 +228,16 @@ with column_2:
         unsafe_allow_html=True
     )
 
-
 # ==========================
 # ===== Number Story 7 =====
 # ==========================
 # > Universities by awards pie chart
 
-fig = px.pie(df_top_universities, values='Winners', names='University', title='<b>Laureates by university of affiliation</b>', height=1000)
+fig = px.pie(df_top_universities, values='Winners', names='University',
+             title='<b>Laureates by institutes of affiliation</b>', height=1000)
 fig.update_traces(textinfo='percent+label', textposition='inside')
+fig.update_layout(title={'font': {'size': 30}})  # , title_x = 0.25)
 st.plotly_chart(fig, use_container_width=True)
-
 
 # ==========================
 # ===== Number Story 6 =====
@@ -250,19 +252,19 @@ found = []
 missing = []
 countries_geo = []
 
-# For simpler acces, setting "zone" as index in a temporary dataFrame
+# For simpler access, setting "zone" as index in a temporary dataFrame
 tmp = countries
 
-# Looping over the custom GeoJSON file
+# Looping over the GeoJSON file
 for country in geo_world['features']:
 
     # Country name detection
     country_name = country['properties']['name']
 
-    # Eventual replacement with our transition dictionnary
+    # Eventual replacement with our transition dictionary
     go_on = country_name in tmp.index
 
-    # If country is in original dataset or transition dictionnary
+    # If country is in original dataset or transition dictionary
     if go_on:
 
         # Adding country to our "Matched/found" countries
@@ -291,15 +293,19 @@ fig = px.choropleth_mapbox(
     geojson=geo_world_ok,
     locations=countries.index,
     color=countries['Laureates'],
-    color_continuous_scale='YlOrRd',
+    color_continuous_scale='Reds',
     range_color=(0, countries['Laureates'].max()),
     hover_name=countries.index,
     hover_data={'Laureates': True},
-    mapbox_style='open-street-map',
+    mapbox_style='carto-positron',
     zoom=1,
     center={'lat': 19, 'lon': 11},
     opacity=0.6,
-    height=800
+    height=800,
+    title='<b>Mathematics award laureates by country</b>',
+    labels={'index': 'Country'}
 )
+
+fig.update_layout(title={'font': {'size': 29}})
 
 st.plotly_chart(fig, use_container_width=True)
