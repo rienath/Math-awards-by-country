@@ -200,25 +200,20 @@ plot_2_title = '<b>Laureates per country per 100 million inhabitants</b>'
 with column_1:
     fig = px.line(df_cumulative_winners, x="Year", y=df_cumulative_winners.columns, line_shape='spline',
                   height=chart_height, title=plot_1_title, color_discrete_sequence=px.colors.qualitative.Light24)
-    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates", font=dict(size=13),
-                      title={
-                          'y': 0.9,
-                          # 'x':0.1,
-                          'xanchor': 'left',
-                          'yanchor': 'top'})
-    fig.update_layout(title={'font': {'size': 23}})
+
+    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates", legend=dict(title='<b>Country</b>'),
+                      font=dict(size=13), title=dict(y=0.9, xanchor='left', yanchor='top', font={'size': 23}))
+
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
 with column_2:
     fig = px.line(df_winners_per_100_mil, x="Year", y=df_winners_per_100_mil.columns, line_shape='spline',
                   height=chart_height, title=plot_2_title, color_discrete_sequence=px.colors.qualitative.Light24)
-    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates per 100 million inhabitants", font=dict(size=13),
-                      title={
-                          'y': 0.9,
-                          # 'x':0.1,
-                          'xanchor': 'left',
-                          'yanchor': 'top'})
-    fig.update_layout(title={'font': {'size': 23}})
+
+    fig.update_layout(xaxis_title="Year", yaxis_title="Laureates per 100 million inhabitants",
+                      legend=dict(title='<b>Country</b>'), font=dict(size=13),
+                      title=dict(y=0.9, xanchor='left', yanchor='top', font={'size': 23}))
+
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
     st.markdown(
@@ -235,6 +230,7 @@ with column_2:
 
 fig = px.pie(df_top_universities, values='Winners', names='University',
              title='<b>Laureates by institutes of affiliation</b>', height=1000)
+
 fig.update_traces(textinfo='percent+label', textposition='inside')
 fig.update_layout(title={'font': {'size': 30}})  # , title_x = 0.25)
 st.plotly_chart(fig, use_container_width=True)
@@ -252,42 +248,24 @@ found = []
 missing = []
 countries_geo = []
 
-# For simpler access, setting "zone" as index in a temporary dataFrame
-tmp = countries
-
 # Looping over the GeoJSON file
 for country in geo_world['features']:
 
     # Country name detection
     country_name = country['properties']['name']
 
-    # Eventual replacement with our transition dictionary
-    go_on = country_name in tmp.index
+    # Getting information from both GeoJSON file and dataFrame
+    geometry = country['geometry']
 
-    # If country is in original dataset or transition dictionary
-    if go_on:
-
-        # Adding country to our "Matched/found" countries
-        found.append(country_name)
-
-        # Getting information from both GeoJSON file and dataFrame
-        geometry = country['geometry']
-
-        # Adding 'id' information for further match between map and data
-        countries_geo.append({
-            'type': 'Feature',
-            'geometry': geometry,
-            'id': country_name
-        })
-
-    # Else, adding the country to the missing countries
-    else:
-        missing.append(country_name)
+    countries_geo.append({
+        'type': 'Feature',
+        'geometry': geometry,
+        'id': country_name
+    })
 
 geo_world_ok = {'type': 'FeatureCollection', 'features': countries_geo}
 
 # Create figure
-
 fig = px.choropleth_mapbox(
     countries,
     geojson=geo_world_ok,
@@ -307,5 +285,4 @@ fig = px.choropleth_mapbox(
 )
 
 fig.update_layout(title={'font': {'size': 29}})
-
 st.plotly_chart(fig, use_container_width=True)
