@@ -99,7 +99,7 @@ top_country_100_mil_result = round(top_country_100_mil_result, sig_fig -
 
 # Assign the fields to Number Story 1 boxes and set other NS1 settings
 box_1_sign = 'Total Fields Medals'
-box_2_sign = 'Total Abel Medals'
+box_2_sign = 'Total Abel Awards'
 box_3_sign = 'Country with the most laureates'
 box_4_sign = 'Country with the most laureates per capita'
 box_1_value = str(fields_total)
