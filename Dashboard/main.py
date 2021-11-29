@@ -224,7 +224,7 @@ st.markdown(
 # > Universities by awards pie chart
 
 fig = px.pie(df_top_universities, values='Winners', names='University',
-             title='<b>Laureates by institutes of affiliation</b>', height=1000, labels={'Winners': 'Laureates'})
+             title='<b>Laureates by institutions of affiliation</b>', height=1000, labels={'Winners': 'Laureates', 'University' : 'Institution'})
 
 fig.update_traces(textinfo='percent+label', textposition='inside')
 fig.update_layout(title={'font': {'size': 30}})  # , title_x = 0.25)
