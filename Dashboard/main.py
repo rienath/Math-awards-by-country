@@ -3,9 +3,6 @@
 # Pie chart sizes ok? Not misleading?
 # Flourish map looks weird when everything is 0
 
-# TODO lighttheme/2021 disclaimer
-
-
 import os
 import pandas as pd
 import plotly.express as px
@@ -17,32 +14,20 @@ import json
 # COLOURS AND STYLES
 # ==================
 
-colors = {
-    'background': '#FFFFFF',
-    'text': '#000000'
-}
-
 # Make the page wide
 st.set_page_config(layout="wide")
 
 # Bootstrap
 
 st.markdown(
-    """<head>
+    """
+<head>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-  <style>
-  body{
-      background-color: #fff;
-      font-size: 40px;
-  }
-
-  </style>
-</head>""", unsafe_allow_html=True
-)
+</head>
+""", unsafe_allow_html=True)
 
 # =====================
 # ===== LOAD DATA =====
@@ -51,7 +36,6 @@ st.markdown(
 # Define data file locations
 location_top_universities = os.path.abspath("data/top-universities.csv")
 location_cumulative_winners = os.path.abspath("data/cumulative-winners.csv")
-location_winners_per_capita = os.path.abspath("data/winners-per-capita.csv")
 location_winners_per_100_mil = os.path.abspath("data/winners-per-100-mil.csv")
 location_overview = os.path.abspath("data/overview.csv")
 location_world_path = os.path.abspath('data/custom.geo.json')
@@ -59,12 +43,12 @@ location_world_path = os.path.abspath('data/custom.geo.json')
 # Load the data
 df_top_universities = pd.read_csv(location_top_universities)
 df_cumulative_winners = pd.read_csv(location_cumulative_winners)
-df_winners_per_capita = pd.read_csv(location_winners_per_capita)
 df_winners_per_100_mil = pd.read_csv(location_winners_per_100_mil)
 df_overview = pd.read_csv(location_overview)
 
 with open(location_world_path) as f:
     geo_world = json.load(f)
+
 
 # =================
 # =================
@@ -79,7 +63,16 @@ with open(location_world_path) as f:
 
 st.markdown('''
 <div class="jumbotron text-center">
-  <h1 style="margin: auto; width: 100%;">Mathematics Awards Interactive Dashboard</h1>
+  <h1 style="margin: auto;">Mathematics Awards Interactive Dashboard</h1>
+  <div class="row justify-content-center">
+    <div class="col-sm-3" style="background-color: #c0f9fa; border-radius: 40px;">
+        <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>For best experience use 
+        fullscreen mode and light theme<br>(☰ → Settings → Theme → Light)</i></p>
+        <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>Awards used: Fields Medal & Abel Prize</i></p>
+        <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>Data: 1935-2021</i></p>
+    </div>
+    <p style="margin: auto; width: 100%;">\00</p>
+  </div>
   <h1 style="margin: auto; width: 100%;"></h1>
 </div>
 ''', unsafe_allow_html=True)
@@ -105,7 +98,6 @@ top_country_100_mil_result = round(top_country_100_mil_result, sig_fig -
                                    int(math.floor(math.log10(abs(top_country_100_mil_result)))) - 1)
 
 # Assign the fields to Number Story 1 boxes and set other NS1 settings
-box_background_colour = '#fccccc'
 box_1_sign = 'Total Fields Medals'
 box_2_sign = 'Total Abel Medals'
 box_3_sign = 'Country with the most laureates'
@@ -139,7 +131,7 @@ st.markdown('''
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
-        <div style="background-color: #c0f9fa; border-radius: 40px; vertical-align: middle;">
+        <div style="background-color: #88cefb; border-radius: 40px; vertical-align: middle;">
           <p style='text-align: center; font-weight: 400; color: #000; position: relative; top: 10px'>''' + box_3_sign
             + '''</p>
           <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>''' + box_3_value + '''</p>
@@ -148,7 +140,7 @@ st.markdown('''
         </div>
     </div>
     <div class="col-sm-3" style='font-size: 15px;'>
-        <div style="background-color: ''' + box_background_colour + '''; border-radius: 40px">
+        <div style="background-color: #fccccc; border-radius: 40px">
           <p style='text-align: center; font-weight: 400; color: #000; position:relative; top:10px'>''' +
             box_4_sign + '''</p>
           <p style='text-align: center; font-size: 35px; font-weight: bold; color: #000'>''' + box_4_value + '''</p>
@@ -159,6 +151,7 @@ st.markdown('''
   </div>
 </div>
 ''', unsafe_allow_html=True)
+
 
 # =============================
 # ===== Number Story 2 & 3=====
@@ -185,6 +178,7 @@ st.markdown(
     ''',
     unsafe_allow_html=True
 )
+
 
 # ==============================
 # ===== Number Story 4 & 5 =====
@@ -223,6 +217,7 @@ with column_2:
         unsafe_allow_html=True
     )
 
+
 # ==========================
 # ===== Number Story 7 =====
 # ==========================
@@ -235,6 +230,7 @@ fig.update_traces(textinfo='percent+label', textposition='inside')
 fig.update_layout(title={'font': {'size': 30}})  # , title_x = 0.25)
 st.plotly_chart(fig, use_container_width=True)
 
+
 # ==========================
 # ===== Number Story 6 =====
 # ==========================
@@ -242,10 +238,6 @@ st.plotly_chart(fig, use_container_width=True)
 
 df_2021 = df_cumulative_winners.iloc[-1]
 countries = df_2021.drop('Year').to_frame(name='Laureates')
-
-# Instantiating necessary lists
-found = []
-missing = []
 countries_geo = []
 
 # Looping over the GeoJSON file
@@ -279,9 +271,9 @@ fig = px.choropleth_mapbox(
     zoom=1,
     center={'lat': 19, 'lon': 11},
     opacity=0.6,
-    height=800,
+    height=830,
     title='<b>Mathematics award laureates by country</b>',
-    labels={'index': 'Country'}
+    labels={'index': 'Country'},
 )
 
 fig.update_layout(title={'font': {'size': 29}})
