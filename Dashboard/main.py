@@ -224,10 +224,10 @@ with column_2:
 # > Universities by awards pie chart
 
 fig = px.pie(df_top_universities, values='Winners', names='University',
-             title='<b>Laureates by institutes of affiliation</b>', height=1000)
+             title='<b>Laureates by institutes of affiliation</b>', height=1000, labels={'Winners': 'Laureates'})
 
 fig.update_traces(textinfo='percent+label', textposition='inside')
-fig.update_layout(title={'font': {'size': 30}})  # , title_x = 0.25)
+fig.update_layout(title={'font': {'size': 30}}) # , title_x = 0.25)
 st.plotly_chart(fig, use_container_width=True)
 
 
