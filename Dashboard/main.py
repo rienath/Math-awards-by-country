@@ -1,8 +1,3 @@
-# Do you like titles?
-# NS 5 does not start from 0 because of smoothing. Could make it not smooth, but it would be ugly.
-# Pie chart sizes ok? Not misleading?
-# Flourish map looks weird when everything is 0
-
 import os
 import pandas as pd
 import plotly.express as px
@@ -10,9 +5,10 @@ import streamlit as st
 import math
 import json
 
-# ==================
-# COLOURS AND STYLES
-# ==================
+
+# ============
+# == STYLES ==
+# ============
 
 # Make the page wide
 st.set_page_config(layout="wide")
@@ -22,12 +18,13 @@ st.set_page_config(layout="wide")
 st.markdown(
     """
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"crossorigin="anonymous"></script>
 </head>
 """, unsafe_allow_html=True)
+
 
 # =====================
 # ===== LOAD DATA =====
@@ -63,19 +60,21 @@ with open(location_world_path) as f:
 
 st.markdown('''
 <div class="jumbotron text-center">
-  <h1 style="margin: auto;">Mathematics Awards Interactive Dashboard</h1>
-  <div class="row justify-content-center">
-    <div class="col-sm-3" style="background-color: #c0f9fa; border-radius: 40px;">
-        <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>For best experience use 
-        fullscreen mode and light theme<br>(☰ → Settings → Theme → Light)</i></p>
-        <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>Awards used: Fields Medal & Abel Prize</i></p>
-        <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>Data: 1935-2021</i></p>
+    <h1 style="margin: auto;">Mathematics Awards Interactive Dashboard</h1>
+    <div class="row justify-content-center">
+        <div class="col-sm-3" style="background-color: #c0f9fa; border-radius: 40px;">
+            <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>For best experience use 
+            fullscreen mode and light theme<br>(☰ → Settings → Theme → Light)</i></p>
+            <p style="margin: auto; text-align: center; color: #000; font-size: 12px">
+            <i>Awards used: Fields Medal & Abel Prize</i></p>
+            <p style="margin: auto; text-align: center; color: #000; font-size: 12px"><i>Data: 1935-2021</i></p>
+        </div>
+        <p style="margin: auto; width: 100%;">\00</p>
     </div>
-    <p style="margin: auto; width: 100%;">\00</p>
-  </div>
-  <h1 style="margin: auto; width: 100%;"></h1>
+    <h1 style="margin: auto; width: 100%;"></h1>
 </div>
 ''', unsafe_allow_html=True)
+
 
 # ==========================
 # ===== Number Story 1 =====
@@ -210,12 +209,13 @@ with column_2:
 
     st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
 
-    st.markdown(
-        '''
-        <h1 style="margin: auto; width: 100%;"></h1>
-        ''',
-        unsafe_allow_html=True
-    )
+# Some space before next visualisation
+st.markdown(
+    '''
+    <h1 style="margin: auto; width: 100%;"></h1>
+    ''',
+    unsafe_allow_html=True
+)
 
 
 # ==========================
@@ -227,7 +227,7 @@ fig = px.pie(df_top_universities, values='Winners', names='University',
              title='<b>Laureates by institutes of affiliation</b>', height=1000, labels={'Winners': 'Laureates'})
 
 fig.update_traces(textinfo='percent+label', textposition='inside')
-fig.update_layout(title={'font': {'size': 30}}) # , title_x = 0.25)
+fig.update_layout(title={'font': {'size': 30}})  # , title_x = 0.25)
 st.plotly_chart(fig, use_container_width=True)
 
 
