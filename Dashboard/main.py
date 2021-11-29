@@ -34,11 +34,11 @@ st.markdown(
 # =====================
 
 # Define data file locations
-location_top_universities = os.path.abspath("../data/top-universities.csv")
-location_cumulative_winners = os.path.abspath("../data/cumulative-winners.csv")
-location_winners_per_100_mil = os.path.abspath("../data/winners-per-100-mil.csv")
-location_overview = os.path.abspath("../data/overview.csv")
-location_world_path = os.path.abspath('../data/custom.geo.json')
+location_top_universities = os.path.abspath("data/top-universities.csv")
+location_cumulative_winners = os.path.abspath("data/cumulative-winners.csv")
+location_winners_per_100_mil = os.path.abspath("data/winners-per-100-mil.csv")
+location_overview = os.path.abspath("data/overview.csv")
+location_world_path = os.path.abspath('data/custom.geo.json')
 
 # Load the data
 df_top_universities = pd.read_csv(location_top_universities)
